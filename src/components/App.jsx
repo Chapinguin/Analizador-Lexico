@@ -91,6 +91,9 @@ function App() {
 
   return (
     <div className="app-container">
+      <div className="side-frame-left"></div>
+      <div className="side-frame-right"></div>
+      
       <header className="header">
         <div className="title-cloud">
           <h1>Analizador Léxico</h1>
