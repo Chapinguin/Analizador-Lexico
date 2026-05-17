@@ -1,26 +1,19 @@
 import { useState } from 'react';
 import './App.css';
+import { analyzeCode } from '../utils/analyzer';
 
 function App() {
   const [code, setCode] = useState('');
   const [tokens, setTokens] = useState([]);
 
   const handleAnalyze = () => {
-    // Por ahora, simularemos unos tokens como prueba de concepto para la UI
-    // Más adelante conectaremos esto con la lógica real del analizador
     if (!code.trim()) {
       setTokens([]);
       return;
     }
 
-    const mockTokens = [
-      { lexeme: 'int', type: 'Palabra Reservada', line: 1 },
-      { lexeme: 'x', type: 'Identificador', line: 1 },
-      { lexeme: '=', type: 'Operador Asignación', line: 1 },
-      { lexeme: '5', type: 'Número Entero', line: 1 },
-      { lexeme: ';', type: 'Símbolo', line: 1 },
-    ];
-    setTokens(mockTokens);
+    const newTokens = analyzeCode(code);
+    setTokens(newTokens);
   };
 
   return (
@@ -52,7 +45,8 @@ function App() {
                 <tr>
                   <th>Línea</th>
                   <th>Lexema</th>
-                  <th>Tipo de Token</th>
+                  <th>Token (Categoría)</th>
+                  <th>Descripción</th>
                 </tr>
               </thead>
               <tbody>
@@ -61,6 +55,7 @@ function App() {
                     <td>{token.line}</td>
                     <td><span style={{ fontFamily: 'monospace', color: '#e2e8f0' }}>{token.lexeme}</span></td>
                     <td><span className="token-badge">{token.type}</span></td>
+                    <td><span style={{ fontSize: '0.9rem' }}>{token.description}</span></td>
                   </tr>
                 ))}
               </tbody>
