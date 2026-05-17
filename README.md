@@ -1,16 +1,34 @@
-# React + Vite
+---
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+# Analizador Léxico Web
 
-Currently, two official plugins are available:
+Un proyecto desarrollado en React para realizar análisis léxico en la web.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## Contributors
 
-## React Compiler
+<table align="center">
+  <tr>
+    <td align="center">
+      <a href="https://github.com/Chapinguin">
+        <img src="https://github.com/Chapinguin.png" width="100px;" alt="Sebastian Chapa"/>
+      </a>
+      <br />
+      <sub><b>Sebastian Chapa (Chapinguin)</b></sub>
+      <br />
+      <sub>Full Stack Developer</sub>
+    </td>
+    <td align="center">
+      <a href="https://github.com/guco-17">
+        <img src="https://github.com/guco-17.png" width="100px;" alt="Gustavo Cortes"/>
+      </a>
+      <br />
+      <sub><b>Gustavo Cortes (guco-17)</b></sub>
+      <br />
+      <sub>Full Stack Developer</sub>
+    </td>
+  </tr>
+</table>
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
-
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+# Members
+[@Chapinguin](https://github.com/Chapinguin)
+[@guco-17](https://github.com/guco-17)

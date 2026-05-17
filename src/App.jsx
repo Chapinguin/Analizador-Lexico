@@ -1,122 +1,79 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from './assets/vite.svg'
-import heroImg from './assets/hero.png'
-import './App.css'
+import { useState } from 'react';
+import './App.css';
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [code, setCode] = useState('');
+  const [tokens, setTokens] = useState([]);
+
+  const handleAnalyze = () => {
+    // Por ahora, simularemos unos tokens como prueba de concepto para la UI
+    // Más adelante conectaremos esto con la lógica real del analizador
+    if (!code.trim()) {
+      setTokens([]);
+      return;
+    }
+
+    const mockTokens = [
+      { lexeme: 'int', type: 'Palabra Reservada', line: 1 },
+      { lexeme: 'x', type: 'Identificador', line: 1 },
+      { lexeme: '=', type: 'Operador Asignación', line: 1 },
+      { lexeme: '5', type: 'Número Entero', line: 1 },
+      { lexeme: ';', type: 'Símbolo', line: 1 },
+    ];
+    setTokens(mockTokens);
+  };
 
   return (
-    <>
-      <section id="center">
-        <div className="hero">
-          <img src={heroImg} className="base" width="170" height="179" alt="" />
-          <img src={reactLogo} className="framework" alt="React logo" />
-          <img src={viteLogo} className="vite" alt="Vite logo" />
-        </div>
-        <div>
-          <h1>Get started</h1>
-          <p>
-            Edit <code>src/App.jsx</code> and save to test <code>HMR</code>
-          </p>
-        </div>
-        <button
-          type="button"
-          className="counter"
-          onClick={() => setCount((count) => count + 1)}
-        >
-          Count is {count}
+    <div className="app-container">
+      <header className="header">
+        <h1>Analizador Léxico</h1>
+        <p>Escribe tu código y descubre los componentes léxicos</p>
+      </header>
+
+      <main className="glass-panel editor-section">
+        <textarea
+          className="code-input"
+          placeholder="Escribe tu código fuente aquí..."
+          value={code}
+          onChange={(e) => setCode(e.target.value)}
+        />
+        <button className="analyze-btn" onClick={handleAnalyze}>
+          Analizar Código
         </button>
+      </main>
+
+      <section className="glass-panel results-section">
+        <h2>Tabla de Tokens</h2>
+        
+        {tokens.length > 0 ? (
+          <div style={{ overflowX: 'auto' }}>
+            <table className="tokens-table">
+              <thead>
+                <tr>
+                  <th>Línea</th>
+                  <th>Lexema</th>
+                  <th>Tipo de Token</th>
+                </tr>
+              </thead>
+              <tbody>
+                {tokens.map((token, index) => (
+                  <tr key={index}>
+                    <td>{token.line}</td>
+                    <td><span style={{ fontFamily: 'monospace', color: '#e2e8f0' }}>{token.lexeme}</span></td>
+                    <td><span className="token-badge">{token.type}</span></td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        ) : (
+          <div className="empty-state">
+            Ingresa algo de código y presiona "Analizar Código" para ver los resultados.
+          </div>
+        )}
       </section>
-
-      <div className="ticks"></div>
-
-      <section id="next-steps">
-        <div id="docs">
-          <svg className="icon" role="presentation" aria-hidden="true">
-            <use href="/icons.svg#documentation-icon"></use>
-          </svg>
-          <h2>Documentation</h2>
-          <p>Your questions, answered</p>
-          <ul>
-            <li>
-              <a href="https://vite.dev/" target="_blank">
-                <img className="logo" src={viteLogo} alt="" />
-                Explore Vite
-              </a>
-            </li>
-            <li>
-              <a href="https://react.dev/" target="_blank">
-                <img className="button-icon" src={reactLogo} alt="" />
-                Learn more
-              </a>
-            </li>
-          </ul>
-        </div>
-        <div id="social">
-          <svg className="icon" role="presentation" aria-hidden="true">
-            <use href="/icons.svg#social-icon"></use>
-          </svg>
-          <h2>Connect with us</h2>
-          <p>Join the Vite community</p>
-          <ul>
-            <li>
-              <a href="https://github.com/vitejs/vite" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#github-icon"></use>
-                </svg>
-                GitHub
-              </a>
-            </li>
-            <li>
-              <a href="https://chat.vite.dev/" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#discord-icon"></use>
-                </svg>
-                Discord
-              </a>
-            </li>
-            <li>
-              <a href="https://x.com/vite_js" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#x-icon"></use>
-                </svg>
-                X.com
-              </a>
-            </li>
-            <li>
-              <a href="https://bsky.app/profile/vite.dev" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#bluesky-icon"></use>
-                </svg>
-                Bluesky
-              </a>
-            </li>
-          </ul>
-        </div>
-      </section>
-
-      <div className="ticks"></div>
-      <section id="spacer"></section>
-    </>
-  )
+    </div>
+  );
 }
 
-export default App
+export default App;
