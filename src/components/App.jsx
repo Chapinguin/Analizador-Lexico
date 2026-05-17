@@ -90,7 +90,7 @@ function App() {
   };
 
   return (
-    <div className="app-container">
+    <>
       <div className="side-frame-left"></div>
       <div className="side-frame-right"></div>
       
@@ -101,7 +101,8 @@ function App() {
         <div className="glow-orb orb-violet"></div>
       </div>
       
-      <header className="header">
+      <div className="app-container">
+        <header className="header">
         <div className="title-cloud">
           <h1>Analizador Léxico</h1>
           <svg className="sparkle-icon" viewBox="0 0 24 24" fill="none" strokeWidth="1.5">
@@ -271,7 +272,8 @@ function App() {
           <a href="https://github.com/guco-17" target="_blank" rel="noopener noreferrer" style={{display: 'inline-flex', color: '#60a5fa', margin: '0 0.2rem'}}>guco-17</a>
         </div>
       </footer>
-    </div>
+      </div>
+    </>
   );
 }
 
