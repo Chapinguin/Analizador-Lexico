@@ -42,10 +42,16 @@ function App() {
           placeholder="Escribe tu código fuente aquí (ej. int x = 10;)..."
           value={code}
           onChange={(e) => setCode(e.target.value)}
+          maxLength={1000}
         />
-        <button className="analyze-btn" onClick={handleAnalyze}>
-          Analizar Código
-        </button>
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginTop: '-0.5rem' }}>
+          <span style={{ fontSize: '0.85rem', color: code.length === 1000 ? '#ef4444' : '#94a3b8' }}>
+            {code.length} / 1000 caracteres
+          </span>
+          <button className="analyze-btn" onClick={handleAnalyze}>
+            Analizar Código
+          </button>
+        </div>
       </main>
 
       <section className="glass-panel results-section">
