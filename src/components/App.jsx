@@ -26,6 +26,34 @@ function App() {
     setParseResult(null);
   };
 
+  const handleDownloadCSV = () => {
+    if (tokens.length === 0) return;
+
+    // Cabeceras y filas del archivo CSV
+    const headers = ['Linea', 'Lexema', 'Token (Categoria)', 'Descripcion'];
+    const rows = tokens.map(t => [
+      t.line,
+      `"${t.lexeme.replace(/"/g, '""')}"`, // escapar comillas dobles
+      `"${t.type}"`,
+      `"${t.description}"`
+    ]);
+
+    const csvContent = "\uFEFF" + [ // \uFEFF añade la marca BOM para corregir tildes/eñes en Excel
+      headers.join(','),
+      ...rows.map(r => r.join(','))
+    ].join('\n');
+
+    const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement('a');
+    link.setAttribute('href', url);
+    link.setAttribute('download', `analisis_lexico_${Date.now()}.csv`);
+    link.style.visibility = 'hidden';
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  };
+
   const handleAnalyze = () => {
     if (!code.trim()) {
       setTokens([]);
@@ -110,14 +138,32 @@ function App() {
       </main>
 
       <section className="glass-panel results-section">
-        <h2>
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{color: '#8b5cf6'}}>
-            <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
-            <line x1="3" y1="9" x2="21" y2="9"></line>
-            <line x1="9" y1="21" x2="9" y2="9"></line>
-          </svg>
-          Resultados del Análisis
-        </h2>
+        <div className="results-header">
+          <div className="results-title-group">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{color: '#8b5cf6'}}>
+              <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
+              <line x1="3" y1="9" x2="21" y2="9"></line>
+              <line x1="9" y1="21" x2="9" y2="9"></line>
+            </svg>
+            <h2>Resultados del Análisis</h2>
+            {tokens.length > 0 && (
+              <span className="token-counter-badge">
+                {tokens.length} {tokens.length === 1 ? 'Token' : 'Tokens'}
+              </span>
+            )}
+          </div>
+          
+          {tokens.length > 0 && (
+            <button className="csv-download-btn" onClick={handleDownloadCSV} title="Descargar reporte en formato Excel/CSV">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                <polyline points="7 10 12 15 17 10"></polyline>
+                <line x1="12" y1="15" x2="12" y2="3"></line>
+              </svg>
+              Exportar CSV
+            </button>
+          )}
+        </div>
 
         {parseResult && (
           <div className={`parser-result ${parseResult.success ? 'parser-success' : 'parser-error'}`}>
