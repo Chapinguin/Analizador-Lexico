@@ -1,0 +1,11 @@
+// Test 1: Declaraciones y Operaciones Básicas en MiniLang
+int edad = 25;
+float salario = 1500.50;
+string puesto = "Desarrollador";
+bool activo = 1;
+
+// Operación aritmética simple
+float bono = salario * 0.10;
+float total = salario + bono;
+
+print(total);
