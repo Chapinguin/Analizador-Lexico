@@ -20,13 +20,13 @@ function App() {
     <div className="app-container">
       <header className="header">
         <h1>Analizador Léxico</h1>
-        <p>Escribe tu código y descubre los componentes léxicos</p>
+        <p>Motor de análisis basado en Autómatas Finitos Deterministas</p>
       </header>
 
       <main className="glass-panel editor-section">
         <textarea
           className="code-input"
-          placeholder="Escribe tu código fuente aquí..."
+          placeholder="Escribe tu código fuente aquí (ej. int x = 10;)..."
           value={code}
           onChange={(e) => setCode(e.target.value)}
         />
@@ -36,10 +36,17 @@ function App() {
       </main>
 
       <section className="glass-panel results-section">
-        <h2>Tabla de Tokens</h2>
+        <h2>
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{color: '#8b5cf6'}}>
+            <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
+            <line x1="3" y1="9" x2="21" y2="9"></line>
+            <line x1="9" y1="21" x2="9" y2="9"></line>
+          </svg>
+          Resultados del Análisis
+        </h2>
         
         {tokens.length > 0 ? (
-          <div style={{ overflowX: 'auto' }}>
+          <div className="table-wrapper">
             <table className="tokens-table">
               <thead>
                 <tr>
@@ -52,10 +59,10 @@ function App() {
               <tbody>
                 {tokens.map((token, index) => (
                   <tr key={index}>
-                    <td>{token.line}</td>
-                    <td><span style={{ fontFamily: 'monospace', color: '#e2e8f0' }}>{token.lexeme}</span></td>
+                    <td style={{ color: '#64748b', fontWeight: '500' }}>{token.line}</td>
+                    <td><span style={{ fontFamily: 'monospace', color: '#f8fafc', fontSize: '1.05rem' }}>{token.lexeme}</span></td>
                     <td><span className="token-badge">{token.type}</span></td>
-                    <td><span style={{ fontSize: '0.9rem' }}>{token.description}</span></td>
+                    <td><span style={{ fontSize: '0.95rem', color: '#cbd5e1' }}>{token.description}</span></td>
                   </tr>
                 ))}
               </tbody>
@@ -63,10 +70,25 @@ function App() {
           </div>
         ) : (
           <div className="empty-state">
-            Ingresa algo de código y presiona "Analizar Código" para ver los resultados.
+            Ingresa código fuente y presiona "Analizar Código" para visualizar el flujo de tokens.
           </div>
         )}
       </section>
+
+      <footer className="footer">
+        <a href="https://github.com/Chapinguin/Analizador-Lexico" target="_blank" rel="noopener noreferrer" className="repo-link">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+            <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
+          </svg>
+          Repositorio del Proyecto
+        </a>
+        <div>
+          Desarrollado por{' '}
+          <a href="https://github.com/Chapinguin" target="_blank" rel="noopener noreferrer" style={{display: 'inline-flex', color: '#a78bfa', margin: '0 0.2rem'}}>Chapinguin</a> 
+          {' '}&amp;{' '}
+          <a href="https://github.com/guco-17" target="_blank" rel="noopener noreferrer" style={{display: 'inline-flex', color: '#60a5fa', margin: '0 0.2rem'}}>guco-17</a>
+        </div>
+      </footer>
     </div>
   );
 }
