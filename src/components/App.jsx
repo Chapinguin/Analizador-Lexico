@@ -19,7 +19,20 @@ function App() {
   return (
     <div className="app-container">
       <header className="header">
-        <h1>Analizador Léxico</h1>
+        <div className="title-cloud">
+          <svg className="sparkle-icon" viewBox="0 0 24 24" fill="none" strokeWidth="1.5">
+            <defs>
+              <linearGradient id="sparkle-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stopColor="#a78bfa" />
+                <stop offset="100%" stopColor="#f472b6" />
+              </linearGradient>
+            </defs>
+            <path d="M12 2C12 2 12 9 19 12C12 15 12 22 12 22C12 22 12 15 5 12C12 9 12 2 12 2Z" fill="url(#sparkle-gradient)" />
+            <path d="M19 4C19 4 19 7 22 8.5C19 10 19 13 19 13C19 13 19 10 16 8.5C19 7 19 4 19 4Z" fill="url(#sparkle-gradient)" />
+            <path d="M6 18C6 18 6 19.5 8 20.5C6 21.5 6 23 6 23C6 23 6 21.5 4 20.5C6 19.5 6 18 6 18Z" fill="url(#sparkle-gradient)" />
+          </svg>
+          <h1>Analizador Léxico</h1>
+        </div>
         <p>Motor de análisis basado en Autómatas Finitos Deterministas</p>
       </header>
 
