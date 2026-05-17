@@ -94,6 +94,13 @@ function App() {
       <div className="side-frame-left"></div>
       <div className="side-frame-right"></div>
       
+      {/* Contenedor de esferas de neón flotantes (animadas por hardware) */}
+      <div className="bg-glow-container">
+        <div className="glow-orb orb-indigo"></div>
+        <div className="glow-orb orb-cyan"></div>
+        <div className="glow-orb orb-violet"></div>
+      </div>
+      
       <header className="header">
         <div className="title-cloud">
           <h1>Analizador Léxico</h1>
