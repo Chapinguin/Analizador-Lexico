@@ -189,6 +189,49 @@
   background: rgba(139, 92, 246, 0.8); 
 }
 
+/* Resultados del Parser Sintáctico */
+.parser-result {
+  display: flex;
+  align-items: center;
+  gap: 1.2rem;
+  padding: 1.5rem;
+  border-radius: 12px;
+  margin-bottom: 0.5rem;
+  animation: fadeIn 0.4s ease-out;
+}
+
+.parser-message strong {
+  display: block;
+  font-size: 1.1rem;
+  margin-bottom: 0.2rem;
+}
+
+.parser-message p {
+  margin: 0;
+  font-size: 0.95rem;
+  opacity: 0.9;
+}
+
+.parser-success {
+  background: rgba(16, 185, 129, 0.1);
+  border: 1px solid rgba(16, 185, 129, 0.3);
+  color: #10b981;
+}
+
+.parser-success .parser-icon {
+  color: #34d399;
+}
+
+.parser-error {
+  background: rgba(239, 68, 68, 0.1);
+  border: 1px solid rgba(239, 68, 68, 0.3);
+  color: #ef4444;
+}
+
+.parser-error .parser-icon {
+  color: #f87171;
+}
+
 .tokens-table {
   width: 100%;
   border-collapse: collapse;

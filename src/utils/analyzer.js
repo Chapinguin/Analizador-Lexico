@@ -4,7 +4,7 @@ export function analyzeCode(code) {
 
   // Patrones regulares basados en la teoría del proyecto
   const patterns = [
-    { type: 'KEYWORD', regex: /^(int|float|if|while|return)\b/ },
+    { type: 'KEYWORD', regex: /^(int|float|string|bool|if|else|while|return|print)\b/ },
     { type: 'DECIMAL_LITERAL', regex: /^[0-9]+\.[0-9]+\b/ },
     { type: 'INTEGER_LITERAL', regex: /^[0-9]+\b/ },
     { type: 'STRING_LITERAL', regex: /^"[^"]*"/ },
