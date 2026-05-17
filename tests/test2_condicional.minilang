@@ -1,0 +1,11 @@
+// Test 2: Condicionales y Comparaciones en MiniLang
+int puntuacion = 85;
+float minimoAprobatorio = 70.0;
+
+if (puntuacion >= minimoAprobatorio) {
+  string mensaje = "Aprobado";
+  print(mensaje);
+} else {
+  string mensaje = "Reprobado";
+  print(mensaje);
+}

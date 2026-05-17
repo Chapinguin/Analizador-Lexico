@@ -1,0 +1,12 @@
+// Test 3: Bucle While y Contador en MiniLang
+int limite = 5;
+int iterador = 0;
+int acumulador = 0;
+
+while (iterador < limite) {
+  acumulador = acumulador + iterador;
+  print(iterador);
+  iterador = iterador + 1;
+}
+
+print(acumulador);
