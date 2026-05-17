@@ -26,6 +26,27 @@ function App() {
     setParseResult(null);
   };
 
+  const handleImportFile = (event) => {
+    const file = event.target.files[0];
+    if (!file) return;
+
+    const reader = new FileReader();
+    reader.onload = (e) => {
+      let text = e.target.result;
+      if (text.length > 1000) {
+        alert(`⚠️ El archivo es demasiado largo (${text.length} caracteres). Se ha recortado a los primeros 1000 caracteres para garantizar un rendimiento óptimo.`);
+        text = text.substring(0, 1000);
+      }
+      setCode(text);
+      setTokens([]);
+      setParseResult(null);
+    };
+    reader.readAsText(file);
+    
+    // Resetear el valor del input para poder volver a cargar el mismo archivo si se edita afuera
+    event.target.value = '';
+  };
+
   const handleDownloadCSV = () => {
     if (tokens.length === 0) return;
 
@@ -117,6 +138,21 @@ function App() {
           </div>
           
           <div className="action-buttons">
+            <input
+              type="file"
+              id="file-import-input"
+              accept=".txt,.minilang,.json,.cpp,.java,.c"
+              style={{ display: 'none' }}
+              onChange={handleImportFile}
+            />
+            <button className="import-btn" onClick={() => document.getElementById('file-import-input').click()} title="Importar archivo de código (.txt, .minilang)">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                <polyline points="17 8 12 3 7 8"></polyline>
+                <line x1="12" y1="3" x2="12" y2="15"></line>
+              </svg>
+              Importar
+            </button>
             <button className="clear-btn" onClick={handleClear} title="Limpiar editor">
               <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                 <polyline points="3 6 5 6 21 6"></polyline>
