@@ -8,6 +8,24 @@ function App() {
   const [tokens, setTokens] = useState([]);
   const [parseResult, setParseResult] = useState(null);
 
+  const loadExample = (exampleType) => {
+    const examples = {
+      basico: `int edad = 20;\nfloat promedio = 9.5;\nstring nombre = "Sebastian";\nprint(edad);`,
+      condicional: `int x = 10;\nint y = 20;\nif (x < y) {\n  print(x);\n} else {\n  print(y);\n}`,
+      ciclo: `int contador = 0;\nwhile (contador < 5) {\n  print(contador);\n  contador = contador + 1;\n}`,
+      error: `int x = 10\nfloat promedio = 9.5;`
+    };
+    setCode(examples[exampleType] || '');
+    setTokens([]);
+    setParseResult(null);
+  };
+
+  const handleClear = () => {
+    setCode('');
+    setTokens([]);
+    setParseResult(null);
+  };
+
   const handleAnalyze = () => {
     if (!code.trim()) {
       setTokens([]);
@@ -43,6 +61,16 @@ function App() {
       </header>
 
       <main className="glass-panel editor-section">
+        <div className="terminal-header">
+          <div className="terminal-dots">
+            <span className="dot red"></span>
+            <span className="dot yellow"></span>
+            <span className="dot green"></span>
+          </div>
+          <div className="terminal-title">editor.minilang</div>
+          <div style={{ width: '52px' }}></div> {/* Balanceador espacial */}
+        </div>
+
         <textarea
           className="code-input"
           placeholder="Escribe tu código fuente aquí (ej. int x = 10;)..."
@@ -50,13 +78,34 @@ function App() {
           onChange={(e) => setCode(e.target.value)}
           maxLength={1000}
         />
-        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginTop: '-0.5rem' }}>
+        
+        <div className="editor-controls">
+          <div className="quick-examples">
+            <span className="examples-label">Ejemplos:</span>
+            <button className="example-tag-btn" onClick={() => loadExample('basico')}>📄 Básico</button>
+            <button className="example-tag-btn" onClick={() => loadExample('condicional')}>🔀 Condicional</button>
+            <button className="example-tag-btn" onClick={() => loadExample('ciclo')}>🔁 Bucle</button>
+            <button className="example-tag-btn error-tag" onClick={() => loadExample('error')}>⚠️ Con Error</button>
+          </div>
+          
+          <div className="action-buttons">
+            <button className="clear-btn" onClick={handleClear} title="Limpiar editor">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <polyline points="3 6 5 6 21 6"></polyline>
+                <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
+              </svg>
+              Limpiar
+            </button>
+            <button className="analyze-btn" onClick={handleAnalyze}>
+              Analizar Código
+            </button>
+          </div>
+        </div>
+        
+        <div className="character-counter-row">
           <span style={{ fontSize: '0.85rem', color: code.length === 1000 ? '#ef4444' : '#94a3b8' }}>
             {code.length} / 1000 caracteres
           </span>
-          <button className="analyze-btn" onClick={handleAnalyze}>
-            Analizar Código
-          </button>
         </div>
       </main>
 
@@ -102,7 +151,7 @@ function App() {
                   <tr key={index}>
                     <td style={{ color: '#64748b', fontWeight: '500' }}>{token.line}</td>
                     <td><span style={{ fontFamily: 'monospace', color: '#f8fafc', fontSize: '1.05rem' }}>{token.lexeme}</span></td>
-                    <td><span className="token-badge">{token.type}</span></td>
+                    <td><span className={`token-badge badge-${token.type.toLowerCase()}`}>{token.type}</span></td>
                     <td><span style={{ fontSize: '0.95rem', color: '#cbd5e1' }}>{token.description}</span></td>
                   </tr>
                 ))}
