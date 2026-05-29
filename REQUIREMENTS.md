@@ -1,3 +1,0 @@
-# Requerimientos
-
-*Documento en construcción.*
