@@ -1,6 +1,56 @@
 # Analizador Léxico Web "Lexify"
 
-Proyecto desarrollado en React para realizar análisis léxico y sintáctico en la web, implementando un motor de análisis basado en Autómatas Finitos Deterministas (DFA) y un parser LL(1) de descenso recursivo.
+Herramienta web interactiva para realizar análisis léxico y sintáctico en un lenguaje didáctico llamado MiniLang. Desarrollado con React 19 y Vite 8, permite escribir código, visualizar el flujo de tokens y verificar la corrección gramatical contra reglas de producción LL(1) .
+
+## Instalación y Ejecución:
+
+### Requisitos Previos:
+
+- Node.js (versión recomendada: 18+)
+- npm o yarn
+
+### Pasos de Instalación
+1. Clonar el repositorio:
+```
+git clone https://github.com/Chapinguin/Analizador-Lexico.git  
+cd Analizador-Lexico
+```
+2. Instalar dependencias:
+```
+npm install
+```
+3. Ejecutar en modo desarrollo:
+```
+npm run dev
+```
+4. Construir para producción:
+```
+npm run build
+```
+5. Previsualizar producción:
+```
+npm run preview
+```
+
+## Punto de Entrada:
+La aplicación se inicializa mediante `src/main.jsx`, que monta el componente `App` en el elemento `root` del DOM dentro de un wrapper `StrictMode`.
+
+## Componentes Principales:
+
+### Capa de UI (src/components/App.jsx)
+
+El componente `App.jsx` actúa como controlador principal, gestionando el estado para:
+
+- Código fuente de entrada (`code`)
+- Tokens resultantes (`tokens`)
+- Estado de validación del parser (`parseResult`)
+
+Funciones clave:
+
+- handleAnalyze(): Orquesta el análisis léxico y sintáctico.
+- handleDownloadCSV(): Exporta resultados a formato CSV.
+- handleImportFile(): Importa archivos .minilang o .txt.
+
 
 ## Especificaciones técnicas:
 
